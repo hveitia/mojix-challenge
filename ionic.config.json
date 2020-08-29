@@ -1,0 +1,7 @@
+{
+  "name": "mojix-challenge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
