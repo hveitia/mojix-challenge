@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-       The Movie Database
+       {{'HOME_TITLE' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
   <ion-card *ngFor="let movie of movieList" (click)="goToDetail(movie)">
     <img src="{{movie.getPosterImage()}}"  *ngIf="isConnected"/>
     <ion-card-header>
@@ -16,7 +16,6 @@
     </ion-card-header>
     <ion-card-content>{{movie.overview}}</ion-card-content>
   </ion-card>
-
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end">
   <ion-fab-button>{{activeLanguage  | uppercase}}</ion-fab-button>

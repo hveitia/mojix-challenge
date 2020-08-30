@@ -3,17 +3,17 @@ export const onboardingValues = [
     {
         title: 'SLIDE1_TITLE',
         img: 'slide_1',
-        desc: 'Welcome to Mojix Code Challenge'
+        desc: 'SLIDE1_DESC'
     },
     {
-        title: 'Who I am?',
+        title: 'SLIDE2_TITLE',
         img: 'slide_2',
-        desc: 'Héctor Veitía Vila, lover of mobile development.'
+        desc: 'SLIDE2_DESC'
     },
     {
-        title: 'About the challenge',
+        title: 'SLIDE3_TITLE',
         img: 'slide_3',
-        desc: 'Small app that interacts with the API https://www.themoviedb.org/ using the best practices.'
+        desc: 'SLIDE3_DESC'
     }
 ];
 

@@ -4,6 +4,7 @@ import {API_URL} from '../../../data/constants';
 import {Movie} from '../../models/movie';
 import {HttpClient} from '@angular/common/http';
 import {DbService} from '../../../shared/services/db.service';
+import {orderByDate} from '../../utils/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class GetPopularMoviesService {
   loadPopularMovies(){
     const url = `${API_URL}popular`;
     this.httpClient.get(url).subscribe((response: any) => {
-      const result = response.results.map(item => new Movie(
+      const partialResult = response.results.map(item => new Movie(
           item.id,
           item.poster_path,
           item.title,
@@ -32,6 +33,7 @@ export class GetPopularMoviesService {
           item.release_date,
           item.backdrop_path
       ));
+      const result = orderByDate(partialResult).slice(0, 10);
       if (result && result.length > 0){
         this.dbService.getAllMovies().then(data => {
           this.dbService.deleteAll().then(res => {
@@ -47,6 +49,5 @@ export class GetPopularMoviesService {
   saveData(movies: Movie[]){
     movies.forEach(item => this.dbService.addMovie(item));
   }
-
 
 }

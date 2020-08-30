@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonSlides, NavController} from '@ionic/angular';
+import {IonSlides} from '@ionic/angular';
 import {onboardingValues} from '../data/onboarding';
-import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-onboarding',
@@ -12,7 +12,7 @@ export class OnboardingPage implements OnInit {
   public onboardSlides = [];
   public showGoButton = false;
   @ViewChild('mainSlides', {static: true}) slides: IonSlides;
-  constructor(private navCtrl: NavController) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.onboardSlides = onboardingValues;
@@ -23,7 +23,7 @@ export class OnboardingPage implements OnInit {
   }
 
   public skipBtn(){
-    this.navCtrl.navigateRoot(['./home']);
+    this.router.navigate(['./home']);
   }
 
   public goNext(){

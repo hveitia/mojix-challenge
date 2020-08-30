@@ -14,7 +14,7 @@
             </ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-          <ion-button color="dark" (click)="skipBtn()" fill="clear">
+          <ion-button color="dark" (click)="skipBtn()" fill="clear" id="buttonSkipContainer">
             Skip
           </ion-button>
         </ion-buttons>
@@ -30,7 +30,7 @@
             <div class="onb-desc ion-text-center">
               <h4 class="ion-text-capitalize ion-no-margin"> {{'ONBOARDING.' + slide.title | translate}} </h4>
               <p class="ion-no-margin">
-                {{slide.desc}}
+                {{'ONBOARDING.' + slide.desc | translate}}
               </p>
             </div>
           </div>

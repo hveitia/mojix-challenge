@@ -1,5 +1,11 @@
 {
   "ONBOARDING": {
-    "SLIDE1_TITLE": "Hello"
-  }
+    "SLIDE1_TITLE": "Hello",
+    "SLIDE1_DESC": "Welcome to Mojix Code Challenge",
+    "SLIDE2_TITLE": "Who I am?",
+    "SLIDE2_DESC": "Héctor Veitía Vila, lover of mobile development.",
+    "SLIDE3_TITLE": "About the challenge",
+    "SLIDE3_DESC": "Small app that interacts with the API https://www.themoviedb.org/ using the best practices."
+  },
+  "HOME_TITLE": "The Movie Database"
 }

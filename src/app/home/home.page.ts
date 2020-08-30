@@ -2,7 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GetPopularMoviesService} from './services/movie-services/get-popular-movies.service';
 import {SubSink} from 'subsink';
 import {Movie} from './models/movie';
-import {NavController} from '@ionic/angular';
 import {ObjectsContainerService} from '../shared/services/objects-container.service';
 import {Router} from '@angular/router';
 import {DbService} from '../shared/services/db.service';
@@ -19,8 +18,8 @@ export class HomePage implements OnInit, OnDestroy{
   private sub = new SubSink();
   isConnected = true;
   activeLanguage = 'en';
-  constructor(private navCtrl: NavController,
-              private getPopularMoviesService: GetPopularMoviesService,
+  loading = true;
+  constructor(private getPopularMoviesService: GetPopularMoviesService,
               private objectsContainerService: ObjectsContainerService,
               private router: Router,
               private dbService: DbService,
@@ -31,6 +30,7 @@ export class HomePage implements OnInit, OnDestroy{
   ngOnInit() {
     this.sub.sink = this.getPopularMoviesService.behaviorSubjectObservable$.subscribe(data => {
       this.movieList = data;
+      this.loading = false;
     }, error => {});
     // watch network for a disconnection
     this.sub.sink = this.network.onDisconnect().subscribe(() => {

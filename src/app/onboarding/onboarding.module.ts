@@ -14,6 +14,6 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule,
     OnboardingPageRoutingModule,
   ],
-  declarations: [OnboardingPage]
+  declarations: [OnboardingPage],
 })
 export class OnboardingPageModule {}

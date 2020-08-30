@@ -32,5 +32,18 @@
                 {{movie.overview}}
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-label><strong>Main Actors and Actresses</strong></ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-33 *ngFor="let actor  of actorsList">
+                <div class="card card-1">
+                    <img src="{{actor.getPosterImage()}}" alt="">
+                    <p style="font-size: 9px;">{{actor.name}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
     </ion-grid>
 </ion-content>
