@@ -12,9 +12,7 @@ export class OnboardingPage implements OnInit {
   public onboardSlides = [];
   public showGoButton = false;
   @ViewChild('mainSlides', {static: true}) slides: IonSlides;
-  constructor(private navCtrl: NavController, private translate: TranslateService) {
-    //this.translate.use('');
-  }
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {
     this.onboardSlides = onboardingValues;

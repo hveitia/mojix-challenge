@@ -7,10 +7,10 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <img src="{{movie.getBackdropImage()}}">
+    <img src="{{movie.getBackdropImage()}}" *ngIf="isConnected">
     <ion-grid>
         <ion-row>
-            <ion-col size="4">
+            <ion-col size="4" *ngIf="isConnected">
                 <div class="hero-image">
                 <img src="{{movie.getPosterImage()}}">
                 </div>

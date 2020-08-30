@@ -10,11 +10,12 @@ import {ObjectsContainerService} from '../shared/services/objects-container.serv
 export class DetailPage implements OnInit {
 
   movie: Movie;
+  isConnected = true;
   constructor(private objectsContainerService: ObjectsContainerService) { }
 
   ngOnInit() {
     this.movie = this.objectsContainerService.getMovie();
-    console.log(this.movie);
+    this.isConnected = this.objectsContainerService.getIsConnected();
   }
 
 }

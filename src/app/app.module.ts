@@ -12,6 +12,9 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MovieInterceptor} from './shared/interceptors/movie-interceptors';
+import {SQLite} from '@ionic-native/sqlite/ngx';
+import {DbService} from './shared/services/db.service';
+import {Network} from '@ionic-native/network/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,8 +39,11 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     StatusBar,
     SplashScreen,
+    SQLite,
+    DbService,
+    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {provide: HTTP_INTERCEPTORS, useClass: MovieInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: MovieInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

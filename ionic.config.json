@@ -1,7 +1,8 @@
 {
   "name": "mojix-challenge",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -4,6 +4,10 @@ import {SubSink} from 'subsink';
 import {Movie} from './models/movie';
 import {NavController} from '@ionic/angular';
 import {ObjectsContainerService} from '../shared/services/objects-container.service';
+import {Router} from '@angular/router';
+import {DbService} from '../shared/services/db.service';
+import {Network} from '@ionic-native/network/ngx';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +17,34 @@ import {ObjectsContainerService} from '../shared/services/objects-container.serv
 export class HomePage implements OnInit, OnDestroy{
   movieList: Movie[];
   private sub = new SubSink();
+  isConnected = true;
+  activeLanguage = 'en';
   constructor(private navCtrl: NavController,
               private getPopularMoviesService: GetPopularMoviesService,
               private objectsContainerService: ObjectsContainerService,
+              private router: Router,
+              private dbService: DbService,
+              private network: Network,
+              private translate: TranslateService,
               ) {}
 
   ngOnInit() {
-    this.sub.sink = this.getPopularMoviesService.behaviorSubjectObservable$.subscribe(res => {
-      this.movieList = res;
+    this.sub.sink = this.getPopularMoviesService.behaviorSubjectObservable$.subscribe(data => {
+      this.movieList = data;
     }, error => {});
+    // watch network for a disconnection
+    this.sub.sink = this.network.onDisconnect().subscribe(() => {
+      this.isConnected = false;
+      this.dbService.getAllMovies().then(data => {
+        this.movieList = data;
+      });
+    });
+    this.sub.sink = this.network.onConnect().subscribe(() => {
+      this.isConnected = true;
+      // We just got a connection but we need to wait briefly
+      // before we determine the connection type. Might need to wait.
+      this.getPopularMoviesService.loadPopularMovies();
+    });
   }
 
   ngOnDestroy() {
@@ -30,6 +53,14 @@ export class HomePage implements OnInit, OnDestroy{
 
   goToDetail(movie: Movie){
     this.objectsContainerService.setMovie(movie);
-    this.navCtrl.navigateRoot(['./detail']);
+    this.objectsContainerService.setIsConnected(this.isConnected);
+    this.router.navigate(['./detail']);
+  }
+
+  setLanguaje(languaje: string){
+    this.translate.use(languaje);
+    this.activeLanguage = languaje;
+    this.objectsContainerService.setActiveLanguage(languaje);
+    this.getPopularMoviesService.loadPopularMovies();
   }
 }
