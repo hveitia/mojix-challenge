@@ -11,7 +11,7 @@ import {orderByDate} from '../../utils/utils';
 })
 export class GetPopularMoviesService {
 
-  private behaviorSubject$;
+  behaviorSubject$;
   behaviorSubjectObservable$: Observable<Movie[]>;
   movies: [];
 
@@ -21,6 +21,7 @@ export class GetPopularMoviesService {
     this.loadPopularMovies();
   }
 
+  // Get popular movies fro API
   loadPopularMovies(){
     const url = `${API_URL}popular`;
     this.httpClient.get(url).subscribe((response: any) => {
@@ -46,6 +47,7 @@ export class GetPopularMoviesService {
     });
   }
 
+  // Save data to local database
   saveData(movies: Movie[]){
     movies.forEach(item => this.dbService.addMovie(item));
   }

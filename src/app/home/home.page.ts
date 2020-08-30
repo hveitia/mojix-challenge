@@ -14,9 +14,15 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy{
+  // List of movies to show
   movieList: Movie[];
+
+  // Subscriber
   private sub = new SubSink();
+
+  // Flag to manage the state of the internet connection
   isConnected = true;
+
   activeLanguage = 'en';
   loading = true;
   constructor(private getPopularMoviesService: GetPopularMoviesService,
@@ -28,35 +34,40 @@ export class HomePage implements OnInit, OnDestroy{
               ) {}
 
   ngOnInit() {
+    // Get movies
     this.sub.sink = this.getPopularMoviesService.behaviorSubjectObservable$.subscribe(data => {
       this.movieList = data;
       this.loading = false;
     }, error => {});
-    // watch network for a disconnection
+
+    // Watch network for a disconnection
     this.sub.sink = this.network.onDisconnect().subscribe(() => {
       this.isConnected = false;
       this.dbService.getAllMovies().then(data => {
         this.movieList = data;
       });
     });
+
+    // Watch network for a connection
     this.sub.sink = this.network.onConnect().subscribe(() => {
       this.isConnected = true;
-      // We just got a connection but we need to wait briefly
-      // before we determine the connection type. Might need to wait.
       this.getPopularMoviesService.loadPopularMovies();
     });
   }
 
   ngOnDestroy() {
+    // Delete subscriptions
     this.sub.unsubscribe();
   }
 
+  // Show detail page
   goToDetail(movie: Movie){
     this.objectsContainerService.setMovie(movie);
     this.objectsContainerService.setIsConnected(this.isConnected);
     this.router.navigate(['./detail']);
   }
 
+  // Set active language
   setLanguaje(languaje: string){
     this.translate.use(languaje);
     this.activeLanguage = languaje;

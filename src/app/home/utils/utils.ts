@@ -2,6 +2,7 @@
 import moment from 'moment';
 import {Movie} from '../models/movie';
 
+// Sort a collection of movies by their release date
 export const orderByDate = (movies: Movie[]) => {
     return movies.sort((a, b) => {
         if (moment(a.releaseDate, 'YYYY-MM-DD').isBefore(moment(b.releaseDate, 'YYYY-MM-DD'))) {

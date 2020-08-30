@@ -16,24 +16,27 @@ export class DetailPage implements OnInit, OnDestroy {
   actorsList: Actor[];
   isConnected = true;
   private sub = new SubSink();
-  sliderOptions = {
-    initialSlide: 0,
-    slidePerView: 1.1,
-    freeMode: true,
-    speed: 400
-  };
   constructor(private objectsContainerService: ObjectsContainerService,
               private getActorsService: GetActorsService) { }
 
   ngOnInit() {
+
+    // Get movie from service
     this.movie = this.objectsContainerService.getMovie();
+
+    // Get connection status
     this.isConnected = this.objectsContainerService.getIsConnected();
+
+    // Load actors
     this.getActorsService.loadActors();
+
+    // Get actors
     this.sub.sink = this.getActorsService.behaviorSubjectObservable$.subscribe(data => {
       this.actorsList = data;
     }, error => {});
   }
   ngOnDestroy() {
+    // Delete subscriptions
     this.sub.unsubscribe();
   }
 

@@ -29,6 +29,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "cordova-android": "9.0.0",
+    "cordova-ios": "6.1.0",
     "moment": "^2.27.0",
     "rxjs": "~6.5.5",
     "subsink": "^1.0.1",
@@ -83,7 +84,8 @@
       "cordova-plugin-network-information": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
