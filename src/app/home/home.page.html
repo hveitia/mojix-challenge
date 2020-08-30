@@ -8,8 +8,13 @@
 
 <ion-content [fullscreen]="true">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card *ngFor="let movie of movieList" (click)="goToDetail(movie)">
+    <img src="{{movie.getPosterImage()}}" />
+    <ion-card-header>
+      <ion-card-title>{{movie.title}}</ion-card-title>
+      <ion-card-subtitle>{{movie.releaseDate}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>{{movie.overview}}</ion-card-content>
+  </ion-card>
+
 </ion-content>

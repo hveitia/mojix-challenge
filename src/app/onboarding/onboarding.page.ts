@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonSlides, NavController} from '@ionic/angular';
+import {onboardingValues} from '../data/onboarding';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-onboarding',
@@ -10,26 +12,12 @@ export class OnboardingPage implements OnInit {
   public onboardSlides = [];
   public showGoButton = false;
   @ViewChild('mainSlides', {static: true}) slides: IonSlides;
-  constructor(private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController, private translate: TranslateService) {
+    //this.translate.use('');
+  }
 
   ngOnInit() {
-    this.onboardSlides = [
-      {
-        title: 'Hello',
-        img: 'slide_1',
-        desc: 'Welcome to Mojix Code Challenge'
-      },
-      {
-        title: 'Who I am?',
-        img: 'slide_2',
-        desc: 'Héctor Veitía Vila, lover of mobile development.'
-      },
-      {
-        title: 'About the challenge',
-        img: 'slide_3',
-        desc: 'Small app that interacts with the API https://www.themoviedb.org/ using the best practices.'
-      }
-    ];
+    this.onboardSlides = onboardingValues;
   }
 
   public goBack(){
