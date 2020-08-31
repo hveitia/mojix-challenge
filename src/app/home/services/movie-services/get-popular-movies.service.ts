@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {API_URL} from '../../../data/constants';
 import {Movie} from '../../models/movie';
 import {HttpClient} from '@angular/common/http';
