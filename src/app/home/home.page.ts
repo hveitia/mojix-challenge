@@ -68,10 +68,10 @@ export class HomePage implements OnInit, OnDestroy{
   }
 
   // Set active language
-  setLanguaje(languaje: string){
-    this.translate.use(languaje);
-    this.activeLanguage = languaje;
-    this.objectsContainerService.setActiveLanguage(languaje);
+  setLanguage(language: string){
+    this.translate.use(language);
+    this.activeLanguage = language;
+    this.objectsContainerService.setActiveLanguage(language);
     this.getPopularMoviesService.loadPopularMovies();
   }
 }
