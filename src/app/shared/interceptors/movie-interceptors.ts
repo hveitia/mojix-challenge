@@ -6,8 +6,7 @@ import {ObjectsContainerService} from '../services/objects-container.service';
 
 @Injectable()
 export class MovieInterceptor implements HttpInterceptor {
-    constructor(private objectsContainerService: ObjectsContainerService) {
-    }
+    constructor(private objectsContainerService: ObjectsContainerService) {}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         const lang = this.objectsContainerService.getActiveLanguage();
